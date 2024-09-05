@@ -8,13 +8,8 @@ template <typename T> class Vector{
         int slots;
 
     public:
-        Vector(int n = 1 , const T& item = T() ):store(nullptr),capacity(n),slots(0){
+        Vector(int n = 1):store(nullptr),capacity(n),slots(0){
             store = new T [capacity];
-            for (int i = 0; i < capacity; i++)
-            {
-                store[i] = item;
-                slots++;
-            }
         }
 
         Vector(std::initializer_list<T> elements):capacity(elements.size()),slots(0){
@@ -30,7 +25,7 @@ template <typename T> class Vector{
 
         void push_into(const T& item) {
             if (slots == capacity) {
-                resize(capacity*2);
+                resize(capacity);
             }
             store[slots++] = item;
         } 
@@ -76,8 +71,8 @@ template <typename T> class Vector{
 
         /*resizes the vector to the specified size*/
         void resize(int new_size){
-            T* temp = new T [capacity*2];
-            for (int i = 0; i < (new_size < capacity ? new_size : capacity ); i++)
+            T* temp = new T [new_size*2];
+            for (int i = 0; i < (new_size < slots ? new_size : slots ); i++)
             {
                 temp[i] = store[i];
             }
