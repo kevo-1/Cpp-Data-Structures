@@ -10,7 +10,7 @@ template<typename T> class Node {
 #include <iostream>
 
 template <typename T> class BST {
-    protected:
+    public:
         Node<T>* Root;
     
     public:
@@ -24,6 +24,48 @@ template <typename T> class BST {
 
     void Insert(T elem) {
         InsertHelper(elem, Root);
+    }
+    
+    Node<T>* Successor(Node<T>* node) {
+        while (node != nullptr && node->Left != nullptr)
+        {
+            node = node->Left;
+        }
+        return node;
+    }
+
+    void Delete(Node<T>*& Root,T elem) {
+        if(Root == nullptr) return;
+
+        if(elem < Root->element) {
+            Delete(Root->Left, elem);
+        } else if(elem > Root->element) {
+            Delete(Root->Right, elem);
+        } else {
+            if(Root->Left == nullptr) {
+                Node<T>* temp = Root->Right;
+                delete Root;
+                Root = temp;
+            } else if (Root->Right == nullptr) {
+                Node<T>* temp = Root->Left;
+                delete Root;
+                Root = temp;
+            } else {
+                Node<T>* succ = Successor(Root->Right);
+                Root->element = succ->element;
+                Delete(Root->Right,succ->element);
+            }
+        }
+    }
+
+    bool Search(T elem, Node<T>* Root) {
+        if(Root == nullptr) {
+            return false;
+        }
+        if(Root->element == elem) {
+            return true;
+        }
+        return elem < Root->element ? Search(elem, Root->Left) : Search(elem, Root->Right);
     }
 
     /*Display BST in 3 different ways (1-InOrder [left, root, right], 2-PreOrder [root, left, right], 3-PostOrder [left, right, root])*/

@@ -20,6 +20,10 @@ int main(){
 
     std::cout << "\nPostOrder Traversal: ";
     tree.DisplayTree(3); // Should print: 20 40 30 60 80 70 50
-
+    
+    std::cout<< (tree.Search(50, tree.Root)?"50 is found":"50 is Not found") << '\n';
+    std::cout<< (tree.Search(90, tree.Root)?"90 is found":"90 is Not found") << '\n';
+    tree.Delete(tree.Root, 50);
+    tree.DisplayTree(2);
     return 0;
 }
