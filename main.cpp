@@ -40,5 +40,12 @@ int main(){
     tri.insertWord("Ninjb");
     tri.insertWord("Ninjc");
     tri.displayTrie();
+    std::cout<<tri.startsWith("Ni")<<std::endl;
+    std::cout<<tri.startsWith("Nj")<<std::endl;
+    std::cout<<tri.searchWord("Nin")<<std::endl;
+    std::cout<<tri.searchWord("Nink")<<std::endl;
+    std::cout<<tri.searchWord("Ninja")<<std::endl;
+    tri.deleteWord("Ninja");
+    std::cout<<tri.searchWord("Ninja")<<std::endl;
     return 0;
 }

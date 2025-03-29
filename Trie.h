@@ -38,6 +38,7 @@ class Trie{
 
     bool searchWord(std::string word) {
         Node* dummy = root;
+        word = __sanitizeWord(word);
         for (auto ch: word) {
             if(dummy->children[ch-'a'] == nullptr) {
                 return false;
@@ -49,6 +50,7 @@ class Trie{
 
     bool startsWith(std::string pre) {
         Node* dummy = root;
+        pre = __sanitizeWord(pre);
         for (auto ch: pre) {
             if(dummy->children[ch-'a'] == nullptr) {
                 return false;
@@ -60,6 +62,7 @@ class Trie{
 
     void deleteWord(std::string word) {
         Node* dummy = root;
+        word = __sanitizeWord(word);
         for (auto ch: word) {
             if(dummy->children[ch-'a'] == nullptr) {
                 return;
